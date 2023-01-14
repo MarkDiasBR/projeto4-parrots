@@ -124,13 +124,17 @@ function reiniciaRodada() {
     cartasViradas = 0;
 }
 
+function desviraCartas() {
+    carta1.classList.remove("virada");
+    carta2.classList.remove("virada");
+}
+
 function analisarCartasViradas(){
     if (carta1.innerHTML === carta2.innerHTML) {
         reiniciaRodada();
     } else {
-        carta1.classList.remove("virada");
-        carta2.classList.remove("virada");
-        setTimeout(reiniciaRodada, 501);
+        setTimeout(desviraCartas,1000);
+        setTimeout(reiniciaRodada,1001);
     }
 };
 
@@ -148,7 +152,7 @@ function virarCarta(carta) {
         carta.classList.add("virada");
         carta2 = carta;
         cartasViradas++;
-        setTimeout(analisarCartasViradas, 1000);
+        analisarCartasViradas();
     }    
     /*
     if (!(carta.classList.includes("virada"))) {
@@ -163,8 +167,8 @@ function virarCarta(carta) {
             setTimeout(1000, analisarCartasViradas())
         }        
     }*/
-}
-
-if (document.querySelectorAll(".virada").length === quantidadeCartas) {
-    alert("Você ganhou em X jogadas!");
+    if (document.querySelectorAll(".virada").length === Number(quantidadeCartas) ) {
+        alert(contadorJogadas);
+        alert(`Você ganhou em ${contadorJogadas} jogadas! A duração do jogo foi de  segundos!`);
+    }
 }
