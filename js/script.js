@@ -172,3 +172,4 @@ function virarCarta(carta) {
         alert(`Você ganhou em ${contadorJogadas} jogadas! A duração do jogo foi de  segundos!`);
     }
 }
+
