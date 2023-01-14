@@ -59,24 +59,54 @@ const quantidadeEmEmoji = {
 };
 
 alert(`
-    PARROT CARD GAME 🦜
+PARROT CARD GAME 🦜
 
-    Quantidade de cartas escolhida: ${quantidadeEmEmoji[quantidadeCartas]}
+Quantidade de cartas escolhida: ${quantidadeEmEmoji[quantidadeCartas]}
 
-    - - - - - - - - TUTORIAL: - - - - - - - -
+- - - - - - - - TUTORIAL: - - - - - - - -
+As cartas apresentam um PARROT 🦜 que se mexe, no verso;
+Cada PARROT 🦜 se repete em duas peças diferentes;
+Você deve, em cada rodada, virar apenas duas peças;
+Caso os PARROTS 🦜 sejam iguais, as cartas permanecem viradas;
+Se os PARROTS 🦜 forem diferentes, estas serão viradas novamente;
+Ganhe o jogo virando todas as cartas no menor tempo possível.  
 
-    As cartas apresentam um PARROT 🦜 que se mexe, no verso;
-    Cada PARROT 🦜 se repete em duas peças diferentes;
-    Você deve, em cada rodada, virar apenas duas peças;
-    Caso os PARROTS 🦜 sejam iguais, as cartas permanecem viradas;
-    Se os PARROTS 🦜 forem diferentes, estas serão viradas novamente;
-    
-    Ganhe o jogo virando todas as cartas no menor tempo possível.  
-
-
-    ⚠️DESVIRE A PRIMEIRA CARTA PRA INICIAR O CRONÔMETRO!⚠️
+⚠️DESVIRE A PRIMEIRA CARTA PRA INICIAR O CRONÔMETRO!⚠️
 `);
 
+const parrots = ["bobross","explody","fiesta","metal","revertit","triplets","unicorn"];
 
+let cartasNaMesa = [];
 
+while (cartasNaMesa.length < quantidadeCartas) {
+    let parrotDaVez = parrots[Math.floor(Math.random() * 7 )];
+    if ( !( cartasNaMesa.includes(parrotDaVez) ) ) {
+        cartasNaMesa.push(parrotDaVez);
+        cartasNaMesa.push(parrotDaVez);   
+    }
+}
+
+function comparador() {
+    return Math.random() - 0.5;
+}
+
+cartasNaMesa.sort(comparador);
+
+alert(cartasNaMesa);
+
+for (let elem of cartasNaMesa) {
+    const ul = document.querySelector(".cartas-na-mesa");
+    ul.innerHTML += `
+    <li>
+        <div class="carta">
+            <div class="face-dianteira face">
+                <img src="./img/back.png">
+            </div>
+            <div class="face-traseira face">
+                <img src="./img/${String(elem)}parrot.gif">
+            </div>
+        </div>
+    </li>
+    `;
+}
 

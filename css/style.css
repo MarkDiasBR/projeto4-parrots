@@ -1,8 +1,11 @@
 body {
+    width: 100vw;
+    height: 100vh;
     background-color: #EEF9BF;
 }
 
 h1 {
+    margin-top: 40px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 700;
@@ -10,11 +13,22 @@ h1 {
     line-height: 66px;
     letter-spacing: -0.004em;
     color: #75B79E;
+    text-align: center;
+}
+
+.cartas-na-mesa {
+    margin: 47px auto 0;
+    max-width: 1023px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 34px;
 }
 
 .carta {
-    width: 200px;
-    height: 250px;
+    width: 117px;
+    height: 146px;
     position: relative;
 }
 
@@ -46,5 +60,6 @@ h1 {
 }
 
 .face img {
-    width: 80%;
+    height: 100px;
+    width: 100px;
 }
