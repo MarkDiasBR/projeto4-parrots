@@ -179,30 +179,33 @@ function virarCarta(carta) {
 
     if (document.querySelectorAll(".virada").length === Number(quantidadeCartas) ) {
         clearInterval(meuInterval);
+        
+        setTimeout(() => {
+            alert(`Você ganhou em ${contadorJogadas} jogadas! A duração do jogo foi de ${contadorSegundos} segundos!`);
+        
 
-        alert(`Você ganhou em ${contadorJogadas} jogadas! A duração do jogo foi de ${contadorSegundos} segundos!`);
-
-        let promptFinal = prompt(`
+            let promptFinal = prompt(`
     Deseja jogar novamente?
 
     Digite "sim" ou "não":
-        `);
-        
-        while (promptFinal !== "sim" && promptFinal !== "não") {
-            if (promptFinal === '"sim"' || promptFinal === '"não"'){
-                alert("SEM ASPAS, POR FAVOR...");
-            }
+            `);
+            
+            while (promptFinal !== "sim" && promptFinal !== "não") {
+                if (promptFinal === '"sim"' || promptFinal === '"não"'){
+                    alert("SEM ASPAS, POR FAVOR...");
+                }
 
-            promptFinal = prompt(`
+                promptFinal = prompt(`
     Deseja jogar novamente?
 
     Digite APENAS "sim" ou "não":
-            `);
-        }
-        
-        if (promptFinal === "sim") {
-            iniciarNovoJogo();
-        }
+                `);
+            }
+            
+            if (promptFinal === "sim") {
+                iniciarNovoJogo();
+            }
+        },500);
     }
 }
 
