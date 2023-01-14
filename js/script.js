@@ -113,6 +113,15 @@ function removeHTML() {
     ul.innerHTML = "";
 }
 
+let divCronometro = document.querySelector(".cronometro");
+let contadorSegundos = 0;
+let meuInterval;
+
+function adicionaSegundo() {
+    contadorSegundos++;
+    divCronometro.innerHTML = contadorSegundos;
+}
+
 let cartasViradas = 0;
 let carta1;
 let carta2;
@@ -123,6 +132,7 @@ function iniciarRodada() {
     carta1 = undefined;
     carta2 = undefined;
     contadorJogadas = 0;
+    contadorSegundos = 0;
 }
 
 //evitar bug de virar uma terceira carta enquanto duas cartas desviram
@@ -149,6 +159,9 @@ function analisarCartasViradas(){
 
 
 function virarCarta(carta) {
+    if (contadorJogadas === 0) {
+        meuInterval = setInterval(adicionaSegundo, 1000);
+    }
 
     if ( !(carta.classList.contains("virada")) ) {
         if (cartasViradas === 0) {
@@ -166,8 +179,9 @@ function virarCarta(carta) {
     }
 
     if (document.querySelectorAll(".virada").length === Number(quantidadeCartas) ) {
-        alert(contadorJogadas);
-        alert(`Você ganhou em ${contadorJogadas} jogadas! A duração do jogo foi de  segundos!`);
+        clearInterval(meuInterval);
+
+        alert(`Você ganhou em ${contadorJogadas} jogadas! A duração do jogo foi de ${contadorSegundos} segundos!`);
 
         let promptFinal = prompt(`
     Deseja jogar novamente?
@@ -193,13 +207,14 @@ function virarCarta(carta) {
     }
 }
 
-
-
 const parrots = ["bobross","explody","fiesta","metal","revertit","triplets","unicorn"];
 let cartasNaMesa = [];
 let quantidadeCartas;
 
 function iniciarNovoJogo() {
+    contadorSegundos = 0;
+    divCronometro.innerHTML = contadorSegundos;
+
     removeHTML();
 
     cartasNaMesa = [];
