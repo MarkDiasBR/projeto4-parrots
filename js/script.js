@@ -98,7 +98,7 @@ for (let elem of cartasNaMesa) {
     const ul = document.querySelector(".cartas-na-mesa");
     ul.innerHTML += `
     <li>
-        <div class="carta">
+        <div class="carta" onclick="virarCarta(this)">
             <div class="face-dianteira face">
                 <img src="./img/back.png">
             </div>
@@ -110,3 +110,52 @@ for (let elem of cartasNaMesa) {
     `;
 }
 
+let cartasViradas = 0;
+
+let carta1;
+let carta2;
+
+//evitar bug de virar uma terceira carta enquanto duas cartas desviram
+function reiniciaRodada() {
+    carta1 = undefined;
+    carta2 = undefined;
+    cartasViradas = 0;
+}
+
+function analisarCartasViradas(){
+    if (carta1.innerHTML === carta2.innerHTML) {
+        reiniciaRodada();
+    } else {
+        carta1.classList.remove("virada");
+        carta2.classList.remove("virada");
+        setTimeout(reiniciaRodada, 501);
+    }
+};
+
+
+
+function virarCarta(carta) {
+    if (cartasViradas === 0) {
+        carta.classList.add("virada");
+        carta1 = carta;
+        cartasViradas++;
+    } else if (cartasViradas === 1) {
+        carta.classList.add("virada");
+        carta2 = carta;
+        cartasViradas++;
+        setTimeout(analisarCartasViradas, 1000);
+    }    
+    /*
+    if (!(carta.classList.includes("virada"))) {
+        if (cartasViradas === 0) {
+            carta.classList.add("virada");
+            carta1 = carta;
+            cartasViradas++;
+        } else if (cartasViradas === 1) {
+            carta.classList.add("virada");
+            carta2 = carta;
+            cartasViradas++;
+            setTimeout(1000, analisarCartasViradas())
+        }        
+    }*/
+}

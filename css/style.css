@@ -51,11 +51,11 @@ h1 {
     transform: rotateY(180deg);
 }
 
-.carta:hover .face-traseira {
+.carta.virada .face-traseira {
     transform: rotateY(0deg);
 }
 
-.carta:hover .face-dianteira {
+.carta.virada .face-dianteira {
     transform: rotateY(-180deg);
 }
 
