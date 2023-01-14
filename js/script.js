@@ -115,6 +115,8 @@ let cartasViradas = 0;
 let carta1;
 let carta2;
 
+let contadorJogadas = 0;
+
 //evitar bug de virar uma terceira carta enquanto duas cartas desviram
 function reiniciaRodada() {
     carta1 = undefined;
@@ -135,6 +137,9 @@ function analisarCartasViradas(){
 
 
 function virarCarta(carta) {
+
+    contadorJogadas++;
+
     if (cartasViradas === 0) {
         carta.classList.add("virada");
         carta1 = carta;
@@ -158,4 +163,8 @@ function virarCarta(carta) {
             setTimeout(1000, analisarCartasViradas())
         }        
     }*/
+}
+
+if (document.querySelectorAll(".virada").length === quantidadeCartas) {
+    alert("Você ganhou em X jogadas!");
 }
