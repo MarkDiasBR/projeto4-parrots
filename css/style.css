@@ -84,6 +84,10 @@ h1 {
     font-family: 'Roboto', sans-serif;
 }
 
+h1.cronometro {
+    display: none;
+}
+
 @media (max-width: 430px) {
     h1 {
         max-width: 70%;
