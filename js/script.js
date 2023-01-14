@@ -1,5 +1,3 @@
-let quantidadeCartas = undefined;
-
 function perguntaQuantidadeCartas() {
     let inputQuantidadeCartas = prompt(`
     PARROT CARD GAME 🦜
@@ -46,8 +44,6 @@ function perguntaQuantidadeCartas() {
     return inputQuantidadeCartas;
 }
 
-quantidadeCartas = perguntaQuantidadeCartas();
-
 const quantidadeEmEmoji = {
     4: "4️⃣",
     6: "6️⃣",
@@ -58,31 +54,31 @@ const quantidadeEmEmoji = {
     14: "1️⃣4️⃣"
 };
 
-alert(`
-PARROT CARD GAME 🦜
+function alertaInicial() {
+    alert("debug");
+     
+    alert(`
+    PARROT CARD GAME 🦜
 
-Quantidade de cartas escolhida: ${quantidadeEmEmoji[quantidadeCartas]}
+    Quantidade de cartas escolhida: ${quantidadeEmEmoji[quantidadeCartas]}
 
-- - - - - - - - TUTORIAL: - - - - - - - -
-As cartas apresentam um PARROT 🦜 que se mexe, no verso;
-Cada PARROT 🦜 se repete em duas peças diferentes;
-Você deve, em cada rodada, virar apenas duas peças;
-Caso os PARROTS 🦜 sejam iguais, as cartas permanecem viradas;
-Se os PARROTS 🦜 forem diferentes, estas serão viradas novamente;
-Ganhe o jogo virando todas as cartas no menor tempo possível.  
+    - - - - - - - - 🎓 TUTORIAL: 🎓 - - - - - - - -
+    🦜 No verso de cada carta tem um PARROT;
+    🦜 Há PARROTS repetidos em duas cartas;
+    🦜 Você pode virar apenas duas peças por rodada;
+    🦜 Se PARROTS forem iguais, as cartas permanecem viradas;
+    🦜 Se forem diferentes, as cartas vão desvirar;
+    🦜 Vire todas as cartas no menor tempo possível! 
 
-⚠️DESVIRE A PRIMEIRA CARTA PRA INICIAR O CRONÔMETRO!⚠️
-`);
+    ⚠️DESVIRE A PRIMEIRA CARTA PRA INICIAR O CRONÔMETRO!⚠️
+    `);
 
-const parrots = ["bobross","explody","fiesta","metal","revertit","triplets","unicorn"];
-
-let cartasNaMesa = [];
-
-while (cartasNaMesa.length < quantidadeCartas) {
-    let parrotDaVez = parrots[Math.floor(Math.random() * 7 )];
-    if ( !( cartasNaMesa.includes(parrotDaVez) ) ) {
-        cartasNaMesa.push(parrotDaVez);
-        cartasNaMesa.push(parrotDaVez);   
+    while (cartasNaMesa.length < quantidadeCartas) {
+        let parrotDaVez = parrots[Math.floor(Math.random() * 7 )];
+        if ( !( cartasNaMesa.includes(parrotDaVez) ) ) {
+            cartasNaMesa.push(parrotDaVez);
+            cartasNaMesa.push(parrotDaVez);   
+        }
     }
 }
 
@@ -90,32 +86,44 @@ function comparador() {
     return Math.random() - 0.5;
 }
 
-cartasNaMesa.sort(comparador);
+function embaralharCartasNaMesa () {
+    cartasNaMesa.sort(comparador);
+}
 
-alert(cartasNaMesa);
+function adicionaHTML() {
+    for (let elem of cartasNaMesa) {
+        const ul = document.querySelector(".cartas-na-mesa");
+        ul.innerHTML += `
+        <li>
+            <div class="carta" onclick="virarCarta(this)">
+                <div class="face-dianteira face">
+                    <img src="./img/back.png">
+                </div>
+                <div class="face-traseira face">
+                    <img src="./img/${String(elem)}parrot.gif">
+                </div>
+            </div>
+        </li>
+        `;
+    }
+}
 
-for (let elem of cartasNaMesa) {
+function removeHTML() {
     const ul = document.querySelector(".cartas-na-mesa");
-    ul.innerHTML += `
-    <li>
-        <div class="carta" onclick="virarCarta(this)">
-            <div class="face-dianteira face">
-                <img src="./img/back.png">
-            </div>
-            <div class="face-traseira face">
-                <img src="./img/${String(elem)}parrot.gif">
-            </div>
-        </div>
-    </li>
-    `;
+    ul.innerHTML = "";
 }
 
 let cartasViradas = 0;
-
 let carta1;
 let carta2;
-
 let contadorJogadas = 0;
+
+function iniciarRodada() {
+    cartasViradas = 0;
+    carta1 = undefined;
+    carta2 = undefined;
+    contadorJogadas = 0;
+}
 
 //evitar bug de virar uma terceira carta enquanto duas cartas desviram
 function reiniciaRodada() {
@@ -142,34 +150,69 @@ function analisarCartasViradas(){
 
 function virarCarta(carta) {
 
-    contadorJogadas++;
-
-    if (cartasViradas === 0) {
-        carta.classList.add("virada");
-        carta1 = carta;
-        cartasViradas++;
-    } else if (cartasViradas === 1) {
-        carta.classList.add("virada");
-        carta2 = carta;
-        cartasViradas++;
-        analisarCartasViradas();
-    }    
-    /*
-    if (!(carta.classList.includes("virada"))) {
+    if ( !(carta.classList.contains("virada")) ) {
         if (cartasViradas === 0) {
+            contadorJogadas++;
             carta.classList.add("virada");
             carta1 = carta;
             cartasViradas++;
         } else if (cartasViradas === 1) {
+            contadorJogadas++;
             carta.classList.add("virada");
             carta2 = carta;
             cartasViradas++;
-            setTimeout(1000, analisarCartasViradas())
-        }        
-    }*/
+            analisarCartasViradas();
+        }   
+    }
+
     if (document.querySelectorAll(".virada").length === Number(quantidadeCartas) ) {
         alert(contadorJogadas);
         alert(`Você ganhou em ${contadorJogadas} jogadas! A duração do jogo foi de  segundos!`);
+
+        let promptFinal = prompt(`
+    Deseja jogar novamente?
+
+    Digite "sim" ou "não":
+        `);
+        
+        while (promptFinal !== "sim" && promptFinal !== "não") {
+            if (promptFinal === '"sim"' || promptFinal === '"não"'){
+                alert("SEM ASPAS, POR FAVOR...");
+            }
+
+            promptFinal = prompt(`
+    Deseja jogar novamente?
+
+    Digite APENAS "sim" ou "não":
+            `);
+        }
+        
+        if (promptFinal === "sim") {
+            iniciarNovoJogo();
+        }
     }
 }
 
+
+
+const parrots = ["bobross","explody","fiesta","metal","revertit","triplets","unicorn"];
+let cartasNaMesa = [];
+let quantidadeCartas;
+
+function iniciarNovoJogo() {
+    removeHTML();
+
+    cartasNaMesa = [];
+
+    quantidadeCartas = perguntaQuantidadeCartas();
+
+    alertaInicial();
+
+    embaralharCartasNaMesa();
+
+    adicionaHTML();
+
+    iniciarRodada();
+}
+
+iniciarNovoJogo();
