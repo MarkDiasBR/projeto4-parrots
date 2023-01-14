@@ -55,8 +55,7 @@ const quantidadeEmEmoji = {
 };
 
 function alertaInicial() {
-    alert("debug");
-     
+   
     alert(`
     PARROT CARD GAME 🦜
 
