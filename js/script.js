@@ -95,12 +95,12 @@ function adicionaHTML() {
         const ul = document.querySelector(".cartas-na-mesa");
         ul.innerHTML += `
         <li>
-            <div class="carta" onclick="virarCarta(this)">
+            <div class="carta" onclick="virarCarta(this)" data-test="card">
                 <div class="face-dianteira face">
-                    <img src="./img/back.png">
+                    <img src="./img/back.png" data-test="face-down-image">
                 </div>
                 <div class="face-traseira face">
-                    <img src="./img/${String(elem)}parrot.gif">
+                    <img src="./img/${String(elem)}parrot.gif" data-test="face-up-image">
                 </div>
             </div>
         </li>
