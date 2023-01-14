@@ -9,8 +9,8 @@ function perguntaQuantidadeCartas() {
     Digite um número PAR de 4️⃣ a 1️⃣4️⃣:
     `);
 
-    //Cobrindo os casos onde é apertado o Botão OK no prompt, ou o Cancel, respectivamente
-    if (inputQuantidadeCartas === null || inputQuantidadeCartas === "") {
+    //Cobrindo os casos onde é apertado o Botão OK no prompt, ou o Cancel, ou ainda qualquer input que não seja um numero inteiro, respectivamente
+    if (inputQuantidadeCartas === null || inputQuantidadeCartas === "" || !(Number.isInteger(Number(inputQuantidadeCartas))) ) {
         return  perguntaQuantidadeCartas();
     }
 
@@ -48,11 +48,33 @@ function perguntaQuantidadeCartas() {
 
 quantidadeCartas = perguntaQuantidadeCartas();
 
+const quantidadeEmEmoji = {
+    4: "4️⃣",
+    6: "6️⃣",
+    8: "8️⃣",
+    10: "1️⃣0️⃣",
+    12: "1️⃣2️⃣",
+    13: "1️⃣3️⃣",
+    14: "1️⃣4️⃣"
+};
+
 alert(`
+    PARROT CARD GAME 🦜
+
+    Quantidade de cartas escolhida: ${quantidadeEmEmoji[quantidadeCartas]}
+
+    - - - - - - - - TUTORIAL: - - - - - - - -
+
+    As cartas apresentam um PARROT 🦜 que se mexe, no verso;
+    Cada PARROT 🦜 se repete em duas peças diferentes;
+    Você deve, em cada rodada, virar apenas duas peças;
+    Caso os PARROTS 🦜 sejam iguais, as cartas permanecem viradas;
+    Se os PARROTS 🦜 forem diferentes, estas serão viradas novamente;
+    
+    Ganhe o jogo virando todas as cartas no menor tempo possível.  
 
 
-Quantidade de cartas escolhida: ${quantidadeCartas}
-TUTORIAL:
+    ⚠️DESVIRE A PRIMEIRA CARTA PRA INICIAR O CRONÔMETRO!⚠️
 `);
 
 
